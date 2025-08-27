@@ -20,7 +20,7 @@ public class Main {
         tf.display();
         cb.display();
 
-        // test setText()
+        // test for setText()
         btn.setText("Submit");
         tf.setText("New Value");
         cb.setText("Subscribe to newsletter");
