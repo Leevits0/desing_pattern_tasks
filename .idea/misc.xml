@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/mediator/pom.xml" />
+        <option value="$PROJECT_DIR$/mediator.chatapp/pom.xml" />
       </list>
     </option>
   </component>

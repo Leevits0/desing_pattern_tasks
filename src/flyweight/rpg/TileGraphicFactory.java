@@ -19,7 +19,6 @@ public final class TileGraphicFactory {
         return CACHE.computeIfAbsent(key, k -> {
             Image img = loadFromClasspath("/images/" + k + ".png");
             if (img == null) img = loadFromClasspath("/images/" + k + ".jpg");
-            // if someone kept the dotted package style:
             if (img == null) img = loadFromClasspath("/resources/images/" + k + ".png");
             if (img == null) img = loadFromClasspath("/resources/images/" + k + ".jpg");
             if (img == null) img = solidColorImage(colorFor(k), tileSize); // fallback

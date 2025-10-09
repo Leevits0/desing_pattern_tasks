@@ -1,62 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
     <artifactId>chatapp</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
-        <!-- Use the JDK you actually have configured in IntelliJ -->
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
+        <!-- Compile to Java 21 bytecode (works great on JDK 24 toolchain) -->
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- JavaFX version; 21.x is stable and works with modern JDKs -->
+        <!-- JavaFX version -->
         <javafx.version>21.0.2</javafx.version>
     </properties>
 
     <dependencies>
-        <!-- JavaFX (controls gives you UI widgets) -->
+        <!-- JavaFX controls (brings base/graphics transitively) -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
         </dependency>
-
-        <!-- javaFX graphics runtime with platform classifier resolved by os-maven-plugin -->
+        <!-- If you use FXML, keep this. If not, you can remove it. -->
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
+            <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
-            <classifier>${os.detected.classifier}</classifier>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Detect OS so the graphics classifier resolves (win, mac, linux) -->
+            <!-- Make sure Maven compiles with the desired release -->
             <plugin>
-                <groupId>kr.motd.maven</groupId>
-                <artifactId>os-maven-plugin</artifactId>
-                <version>1.7.1</version>
-                <executions>
-                    <execution>
-                        <goals><goal>attach-platform</goal></goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
             </plugin>
 
-            <!-- Easy run target: mvn -DskipTests javafx:run -->
+            <!-- Easiest way to run JavaFX: mvn javafx:run -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>org.example.chat.MainApp</mainClass>
+                    <mainClass>org.example.chat.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
