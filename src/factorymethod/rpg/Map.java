@@ -43,4 +43,10 @@ public abstract class Map {
         }
     }
     public abstract Tile createTile();
+
+    public int getRows() { return ROWS; }
+
+    public int getCols() { return COLS; }
+
+    public Tile getTile(int row, int col) { return tiles[row][col]; }
 }
